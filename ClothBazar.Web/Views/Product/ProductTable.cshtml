@@ -3,13 +3,17 @@
     ViewBag.Title = "ProductTable";
 }
 
-
+<br />
 <div>
+
     <form method="post">
+
         <input id="searchTxt" name="Search" />
 
         <button type="button" id="searchBtn">Search</button>
     </form>
+    <br />
+
     <button type="button" id="newBtn">Add New</button>
 
 </div>
@@ -17,8 +21,8 @@
 
 
 <div>
-
-    <table class="table table-hover">
+    <br />
+    <table class="table-bordered table">
         <thead>
             <tr>
                 <td>Product Name</td>
@@ -36,8 +40,8 @@
                     <td>-</td>
                     <td>@product.Price</td>
                     <td>
-                        <button>Edit</button>
-                        <button>Delete</button>
+                        <button class="editProduct" data-id="@product.ID">Edit</button>
+                        <button class="deleteProduct" data-id="@product.ID">Delete</button>
                     </td>
                 </tr>
             }
@@ -51,21 +55,20 @@
 
 
 
-@section scripts{
-
+<script src="~/Scripts/jquery-1.10.2.min.js"></script>
     <script>
         $(document).ready(function () {
+
             $("#searchBtn").click(function () {
+
                 var searchVal = $("#searchTxt").val();
 
                 $.ajax({
-                    type: "GET",
                     url: '/Product/ProductTable',
                     data: {
-                        search : searchVal
+                        search: searchVal
                     }
                 })
-
                 .done(function (response) {
                     $("#tableContainer").html(response);
                 })
@@ -76,11 +79,70 @@
 
             });
 
+
+            $("#newBtn").click(function () {
+
+                $.ajax({
+                    url: '/Product/Create',
+                })
+
+                .done(function (response) {
+                    $("#addProduct").html(response);
+                })
+
+                .fail(function (XMLHttpRequest, textStatus, errorThrown) {
+                    alert("fail");
+
+                });
+
+            });
+            
+            $(".editProduct").click(function () {
+
+                $.ajax({
+                    url: '/Product/Edit',
+                    data: {
+                        ID : $(this).attr('data-id')
+                    }
+                })
+
+                .done(function (response) {
+                    $("#addProduct").html(response);
+                })
+
+                .fail(function (XMLHttpRequest, textStatus, errorThrown) {
+                    alert("fail");
+
+                });
+
+            });
+
+            $(".deleteProduct").click(function () {
+
+                var confirmDelete = confirm("Are your sure, you want to delete this product?");
+                if (confirmDelete)
+                {
+                    $.ajax({
+                        type: 'POST',
+                        url: '/Product/Delete',
+                        data: {
+                            ID: $(this).attr('data-id')
+                        }
+                    })
+                    .done(function (response) {
+                        $("#tableContainer").html(response);
+                    })
+                    .fail(function (XMLHttpRequest, textStatus, errorThrown) {
+                        alert("fail");
+
+                    });
+                }
+
+            });
+
+
         });
 
 
     </script>
-
-}
-
 
