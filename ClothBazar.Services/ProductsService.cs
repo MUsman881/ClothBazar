@@ -5,6 +5,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Data.Entity;
 
 namespace ClothBazar.Services
 {
@@ -22,7 +23,11 @@ namespace ClothBazar.Services
         {
             using (var context = new CBContext())
             {
-                return context.Products.ToList();
+                //for single data approach
+                return context.Products.Include(x => x.Category).ToList();
+
+                //for mulitple data approach
+               //return context.Products.Include("Category.Products").ToList();
             }
         }
 
@@ -30,6 +35,8 @@ namespace ClothBazar.Services
         {
             using (var context = new CBContext())
             {
+                context.Entry(product).State = System.Data.Entity.EntityState.Unchanged;
+
                 context.Products.Add(product);
 
                 context.SaveChanges();

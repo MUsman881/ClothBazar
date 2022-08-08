@@ -4,25 +4,44 @@
 }
 
 <br />
-<div>
 
+<div>
     <form method="post">
 
-        <input id="searchTxt" name="Search" />
+        <div class="row">
+            <div class="col-md-8">
+                <div class="form-group">
+                    <label>Search</label>
+                    <input class="form-control" id="searchTxt" name="Search" />
+                </div>
+            </div>
 
-        <button type="button" id="searchBtn">Search</button>
+            <div class="col-md-4">
+                <div class="form-group">
+                    <label>Action</label>
+                    <div class="row">
+                        <div class="col-md-6">
+                            <button class="btn btn-primary form-control" type="button" id="searchBtn">Search</button>
+
+                        </div>
+                        <div class="col-md-6">
+                            <button class="btn btn-primary form-control" type="button" id="newBtn">Add New</button>
+
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
     </form>
-    <br />
-
-    <button type="button" id="newBtn">Add New</button>
-
 </div>
 
 
 
 <div>
-    <br />
-    <table class="table-bordered table">
+    
+
+    <table class="table table-striped">
         <thead>
             <tr>
                 <td>Product Name</td>
@@ -37,7 +56,16 @@
             {
                 <tr>
                     <td>@product.Name</td>
-                    <td>-</td>
+                    <td>
+                        @if(product.Category != null)
+                        {
+                            <text>@product.Category.Name</text>
+                        }
+                        else
+                        {
+                            <text>-</text>
+                        }
+                    </td>
                     <td>@product.Price</td>
                     <td>
                         <button class="editProduct" data-id="@product.ID">Edit</button>
