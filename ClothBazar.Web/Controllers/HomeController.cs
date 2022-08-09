@@ -10,13 +10,12 @@ namespace ClothBazar.Web.Controllers
 {
     public class HomeController : Controller
     {
-        CategoriesService categoryService = new CategoriesService();
 
         HomeViewModels model = new HomeViewModels();
 
         public ActionResult Index()
         {
-            model.Categories = categoryService.GetCategories();
+            model.FeaturedCategories = CategoriesService.Instance.GetFeaturedCategories();
 
             return View(model);
         }

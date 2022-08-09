@@ -1,5 +1,6 @@
 ﻿using ClothBazar.Entities;
 using ClothBazar.Services;
+using ClothBazar.Web.ViewModels;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -10,62 +11,103 @@ namespace ClothBazar.Web.Controllers
 {
     public class CategoryController : Controller
     {
-        CategoriesService categoryService = new CategoriesService();
         // GET: Category
 
         [HttpGet]
         public ActionResult Index()
         {
-            var categories = categoryService.GetCategories();
-
-            return View(categories);
-        }
-
-        [HttpGet]
-        public ActionResult Create()
-        {
             return View();
         }
 
-        [HttpPost]
-        public ActionResult Create(Category category)
+        #region CategoryTable
+        public ActionResult CategoryTable(string search)
         {
-            categoryService.SaveCategory(category);
+            CategorySearchViewModel model = new CategorySearchViewModel();
+            model.Categories = CategoriesService.Instance.GetCategories();
 
-            return RedirectToAction("Index");
+            if (string.IsNullOrEmpty(search) == false)
+            {
+                model.SearchTerm = search;
+                model.Categories = model.Categories.Where(c => c.Name != null && c.Name.ToLower().Contains(search.ToLower())).ToList();
+
+            }
+
+            return PartialView("Categorytable", model);
+        }
+        #endregion
+
+        #region Creation
+        [HttpGet]
+        public ActionResult Create()
+        {
+            return PartialView();
         }
 
+        [HttpPost]
+        public ActionResult Create(NewCategoryViewModel model)
+        {
+            if (ModelState.IsValid)
+            {
+                var newCategory = new Category();
+                newCategory.Name = model.Name;
+                newCategory.Description = model.Description;
+                newCategory.ImageUrl = model.Description;
+                newCategory.isFeatured = model.isFeatured;
+
+                CategoriesService.Instance.SaveCategory(newCategory);
+
+                return RedirectToAction("CategoryTable");
+            }
+
+            else
+            {
+                return new HttpStatusCodeResult(500);
+            }
+        }
+        #endregion
+
+        #region Updation
         [HttpGet]
         public ActionResult Edit(int ID)
         {
-            var category = categoryService.GetCategory(ID);
+            EditCategoryViewModel model = new EditCategoryViewModel();
+            var category = CategoriesService.Instance.GetCategory(ID);
 
-            return View(category);
+            model.ID = category.ID;
+            model.Name = category.Name;
+            model.Description = category.Description;
+            model.ImageURL = category.ImageUrl;
+            model.isFeatured = category.isFeatured;
+
+            return PartialView(model);
         }
 
         [HttpPost]
-        public ActionResult Edit(Category category)
+        public ActionResult Edit(EditCategoryViewModel model)
         {
-            categoryService.UpdateCategory(category);
+            var existingCategory = CategoriesService.Instance.GetCategory(model.ID);
 
-            return RedirectToAction("Index");
+            existingCategory.Name = model.Name;
+            existingCategory.Description = model.Description;
+            existingCategory.ImageUrl = model.ImageURL;
+            existingCategory.isFeatured = model.isFeatured;
+
+            CategoriesService.Instance.UpdateCategory(existingCategory);
+
+            return RedirectToAction("CategoryTable");
         }
+        #endregion
 
-        [HttpGet]
-        public ActionResult Delete(int ID)
-        {
-            var category = categoryService.GetCategory(ID);
-
-            return View(category);
-        }
-
+        #region Deletion
         [HttpPost]
         public ActionResult Delete(Category category)
         {
 
-            categoryService.DeleteCategory(category.ID);
+            CategoriesService.Instance.DeleteCategory(category.ID);
 
             return RedirectToAction("Index");
         }
+        #endregion
+
     }
 }

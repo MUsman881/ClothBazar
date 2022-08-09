@@ -60,6 +60,14 @@
     <Compile Include="Migrations\202208072225115_ImageUrlAdded.Designer.cs">
       <DependentUpon>202208072225115_ImageUrlAdded.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\202208081456027_isFeatured.cs" />
+    <Compile Include="Migrations\202208081456027_isFeatured.Designer.cs">
+      <DependentUpon>202208081456027_isFeatured.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\202208082158502_configurationsTable.cs" />
+    <Compile Include="Migrations\202208082158502_configurationsTable.Designer.cs">
+      <DependentUpon>202208082158502_configurationsTable.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
@@ -79,6 +87,12 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\202208072225115_ImageUrlAdded.resx">
       <DependentUpon>202208072225115_ImageUrlAdded.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202208081456027_isFeatured.resx">
+      <DependentUpon>202208081456027_isFeatured.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202208082158502_configurationsTable.resx">
+      <DependentUpon>202208082158502_configurationsTable.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

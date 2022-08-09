@@ -11,73 +11,128 @@ namespace ClothBazar.Web.Controllers
 {
     public class ProductController : Controller
     {
-        ProductsService productService = new ProductsService();
-        CategoriesService category = new CategoriesService();
         // GET: Product
         public ActionResult Index()
         {
             return View();
         }
 
-        public ActionResult ProductTable(string search)
+        #region ProductTable
+        public ActionResult ProductTable(string search, int? pageNo)
         {
-            var products = productService.GetProducts();
+            ProductSearchViewModel model = new ProductSearchViewModel();
+
+            model.PageNo = pageNo.HasValue ? pageNo.Value > 0 ? pageNo.Value : 1 : 1;
+
+            #region ifelse similar to above
+            //if (pageNo.HasValue)
+            //{
+            //    if(pageNo.Value > 0)
+            //    {
+            //        model.PageNo = pageNo.Value;
+            //    }
+            //    else
+            //    {
+            //        model.PageNo = 1;
+            //    }
+            //}
+            //else
+            //{
+            //    model.PageNo = 1;
+            //}
+            #endregion
+
+            model.Products = ProductsService.Instance.GetProducts(model.PageNo);
 
             if (string.IsNullOrEmpty(search) == false)
             {
-                products = products.Where(p => p.Name != null && p.Name.ToLower().Contains(search.ToLower())).ToList();
+                model.SearchTerm = search;
+                model.Products = model.Products.Where(p => p.Name != null && p.Name.ToLower().Contains(search.ToLower())).ToList();
 
             }
 
-            return PartialView(products);
+            return PartialView(model);
         }
+        #endregion
 
+        #region Creation
         [HttpGet]
         public ActionResult Create()
         {
 
-            var categories = category.GetCategories();
+            NewProductViewModel model = new NewProductViewModel();
+            model.AvailableCategories = CategoriesService.Instance.GetAllCategories();
 
-            return PartialView(categories);
+            return PartialView(model);
         }
 
         [HttpPost]
-        public ActionResult Create(CategoryViewModel model)
+        public ActionResult Create(NewProductViewModel model)
         {
             var newProduct = new Product();
             newProduct.Name = model.Name;
             newProduct.Description = model.Description;
             newProduct.Price = model.Price;
-            newProduct.Category = category.GetCategory(model.CategoryID);
+            newProduct.Category = CategoriesService.Instance.GetCategory(model.CategoryID);
+            newProduct.ImageURL = model.ImageURL;
 
-            productService.SaveProduct(newProduct);
+            ProductsService.Instance.SaveProduct(newProduct);
 
             return RedirectToAction("ProductTable");
         }
+        #endregion
 
+        #region Updation
         [HttpGet]
         public ActionResult Edit(int ID)
         {
-            var product = productService.GetProduct(ID);
+            EditProductViewModel model = new EditProductViewModel();
+
+            var product = ProductsService.Instance.GetProduct(ID);
+
+            model.ID = product.ID;
+            model.Name = product.Name;
+            model.Description = product.Description;
+            model.Price = product.Price;
+            model.CategoryID = product.Category != null ? product.Category.ID : 0;
+            model.ImageURL = product.ImageURL;
+
+            model.AvailableCategories = CategoriesService.Instance.GetAllCategories();
 
             return PartialView(product);
         }
 
         [HttpPost]
-        public ActionResult Edit(Product product)
+        public ActionResult Edit(EditProductViewModel model)
         {
-            productService.UpdateProduct(product);
+            var existingProduct = ProductsService.Instance.GetProduct(model.ID);
+            existingProduct.Name = model.Name;
+            existingProduct.Description = model.Description;
+            existingProduct.Price = model.Price;
+
+            existingProduct.Category = null; //mark it null. Because the referncy key is changed below
+            existingProduct.CategoryID = model.CategoryID;
+
+            //dont update imageURL if its empty
+            if (!string.IsNullOrEmpty(model.ImageURL))
+            {
+                existingProduct.ImageURL = model.ImageURL;
+            }
+
+            ProductsService.Instance.UpdateProduct(existingProduct);
 
             return RedirectToAction("ProductTable");
         }
+        #endregion
 
-        
+        #region Deletion
         [HttpPost]
         public ActionResult Delete(int ID)
         {
-            productService.DeleteProduct(ID);
+            ProductsService.Instance.DeleteProduct(ID);
 
             return RedirectToAction("ProductTable");
         }
+        #endregion
     }
 }

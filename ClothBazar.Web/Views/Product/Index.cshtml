@@ -4,24 +4,37 @@
 }
 
 
-<div class="container">
-
-    <div id="tableContainer">
-
-        @{
-            Html.RenderAction("ProductTable");
-
-        }
+<section class="flat-row flat-iconbox">
+    <div class="container">
+        <div class="row">
+            <div class="col-md-12">
+                <div class="title-section">
+                    <h2 class="title">
+                        Products
+                    </h2>
+                </div>
+            </div>
+        </div>
+        <div id="tableContainer">
+            @{Html.RenderAction("ProductTable");
+            }
+        </div>
+        <hr />
+        <div id="addProduct">
+        </div>
     </div>
+</section>
 
-    <hr />
+<script>
+	function focusAction(controlToFocus) {
+		$('html, body').animate({
+			scrollTop: $("#" + controlToFocus).offset().top - 100
+		}, 1000);
+	}
+</script>
 
-    <div id="addProduct">
 
 
-    </div>
-
-</div>
 
 
 

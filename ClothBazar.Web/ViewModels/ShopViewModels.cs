@@ -6,11 +6,10 @@ using System.Web;
 
 namespace ClothBazar.Web.ViewModels
 {
-    public class HomeViewModels
+    public class CheckoutViewModel
     {
-        public List<Category> FeaturedCategories { get; set; }
+        public List<Product> CartProducts { get; set; }
 
-        public List<Product> FeaturedProducts { get; set; }
-
+        public List<int> CartProductsIDs { get; set; }
     }
 }

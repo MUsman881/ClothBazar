@@ -31,7 +31,7 @@
         <script src="javascript/respond.min.js"></script>
     <![endif]-->
     <script src="~/Content/javascript/jquery.min.js"></script>
-
+    <script src="~/Content/javascript/jquery-ui.js"></script>
 
 </head>
 
@@ -180,10 +180,12 @@
                                 </div>
                             </form>
                             <ul class="flat-social">
-                                <li><a href="#"><i class="fa fa-facebook"></i></a></li>
+                            @{ 
+                                var facebookURL = ConfigurationService.Instance.GetConfigs("FacebookURL").Value;
+                            }
+                                <li><a href="@facebookURL"><i class="fa fa-facebook"></i></a></li>
                                 <li><a href="#"><i class="fa fa-twitter"></i></a></li>
                                 <li><a href="#"><i class="fa fa-google"></i></a></li>
-                                <li><a href="#"><i class="fa fa-behance"></i></a></li>
                                 <li><a href="#"><i class="fa fa-linkedin"></i></a></li>
                             </ul><!-- /.flat-social -->
                         </div><!-- /.subscribe -->
@@ -232,8 +234,8 @@
                                 <a href="index.html"><img src="~/Content/images/logo@2x.png" alt="image" width="107" height="24"></a>
                             </div>
                             <ul class="flat-contact">
-                                <li class="address">112 Kingdom, NA 12, New York</li>
-                                <li class="phone">+12 345 678 910</li>
+                                <li class="address">@ConfigurationService.Instance.GetConfigs("CompanyAddress").Value;</li>
+                                <li class="phone">@ConfigurationService.Instance("CompanyPhone").Value;</li>
                                 <li class="email">infor.deercreative@gmail.com</li>
                             </ul><!-- /.flat-contact -->
                         </div><!-- /.widget -->
@@ -246,7 +248,7 @@
             <div class="container">
                 <div class="row">
                     <div class="col-md-12">
-                        <p class="copyright text-center">Copyright 2018 <a href="#">Modaz</a></p>
+                        <p class="copyright text-center">Copyright 2022 <a href="#">Ecommerce by USMAN</a></p>
                     </div>
                 </div>
             </div>
@@ -297,6 +299,8 @@
     <script src="~/Content/rev-slider/js/extensions/revolution.extension.parallax.min.js"></script>
     <script src="~/Content/rev-slider/js/extensions/revolution.extension.slideanims.min.js"></script>
     <script src="~/Content/rev-slider/js/extensions/revolution.extension.video.min.js"></script>
+
+    <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
 
 </body>
 </html>
