@@ -21,6 +21,7 @@ namespace ClothBazar.Web.Controllers
         public ActionResult ProductTable(string search, int? pageNo)
         {
             ProductSearchViewModel model = new ProductSearchViewModel();
+            model.SearchTerm = search;
 
             model.PageNo = pageNo.HasValue ? pageNo.Value > 0 ? pageNo.Value : 1 : 1;
 
@@ -46,7 +47,6 @@ namespace ClothBazar.Web.Controllers
 
             if (string.IsNullOrEmpty(search) == false)
             {
-                model.SearchTerm = search;
                 model.Products = model.Products.Where(p => p.Name != null && p.Name.ToLower().Contains(search.ToLower())).ToList();
 
             }
@@ -69,16 +69,23 @@ namespace ClothBazar.Web.Controllers
         [HttpPost]
         public ActionResult Create(NewProductViewModel model)
         {
-            var newProduct = new Product();
-            newProduct.Name = model.Name;
-            newProduct.Description = model.Description;
-            newProduct.Price = model.Price;
-            newProduct.Category = CategoriesService.Instance.GetCategory(model.CategoryID);
-            newProduct.ImageURL = model.ImageURL;
+            if (ModelState.IsValid)
+            {
+                var newProduct = new Product();
+                newProduct.Name = model.Name;
+                newProduct.Description = model.Description;
+                newProduct.Price = model.Price;
+                newProduct.Category = CategoriesService.Instance.GetCategory(model.CategoryID);
+                newProduct.ImageURL = model.ImageURL;
 
-            ProductsService.Instance.SaveProduct(newProduct);
+                ProductsService.Instance.SaveProduct(newProduct);
 
-            return RedirectToAction("ProductTable");
+                return RedirectToAction("ProductTable");
+            }
+            else
+            {
+                return new HttpStatusCodeResult(500);
+            }
         }
         #endregion
 
@@ -99,29 +106,35 @@ namespace ClothBazar.Web.Controllers
 
             model.AvailableCategories = CategoriesService.Instance.GetAllCategories();
 
-            return PartialView(product);
+            return PartialView(model);
         }
 
         [HttpPost]
         public ActionResult Edit(EditProductViewModel model)
         {
-            var existingProduct = ProductsService.Instance.GetProduct(model.ID);
-            existingProduct.Name = model.Name;
-            existingProduct.Description = model.Description;
-            existingProduct.Price = model.Price;
-
-            existingProduct.Category = null; //mark it null. Because the referncy key is changed below
-            existingProduct.CategoryID = model.CategoryID;
-
-            //dont update imageURL if its empty
-            if (!string.IsNullOrEmpty(model.ImageURL))
+            if (ModelState.IsValid)
             {
-                existingProduct.ImageURL = model.ImageURL;
+                var existingProduct = ProductsService.Instance.GetProduct(model.ID);
+                existingProduct.Name = model.Name;
+                existingProduct.Description = model.Description;
+                existingProduct.Price = model.Price;
+
+                existingProduct.Category = null; //mark it null. Because the referncy key is changed below
+                existingProduct.CategoryID = model.CategoryID;
+
+                //dont update imageURL if its empty
+                if (!string.IsNullOrEmpty(model.ImageURL))
+                {
+                    existingProduct.ImageURL = model.ImageURL;
+                }
+                ProductsService.Instance.UpdateProduct(existingProduct);
+
+                return RedirectToAction("ProductTable");
             }
-
-            ProductsService.Instance.UpdateProduct(existingProduct);
-
-            return RedirectToAction("ProductTable");
+            else
+            {
+                return new HttpStatusCodeResult(500);
+            }
         }
         #endregion
 

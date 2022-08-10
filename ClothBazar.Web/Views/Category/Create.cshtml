@@ -1,18 +1,16 @@
-﻿
-@{
+﻿@{
     ViewBag.Title = "Create";
 
     var imageURL = "/Content/images/system/placeholder-image.png";
 }
-
 <h2>Create Category</h2>
 
-<form id="addCategory">
+<form id="createCategory">
     <div class="row">
         <div class="col-md-8">
             <div class="form-group">
                 <label>Name <span class="text-danger">*</span></label>
-                <input class="form-control" name="Name" />
+                <input class="form-control " name="Name" id="Name" />
             </div>
             <div class="form-group">
                 <label>Description</label>
@@ -45,19 +43,19 @@
     <button id="cancelBtn" type="button" class="btn btn-primary">Cancel</button>
 </form>
 
-   
 
 <script>
 
     $(document).ready(function () {
 
         $("#imageUpload").change(function () {
+
             var element = this;
 
             var formData = new FormData();
 
             var totalFiles = element.files.length;
-             
+
             for (var i = 0; i < totalFiles; i++) {
                 var file = element.files[i];
                 formData.append("Photo", file);
@@ -65,30 +63,27 @@
 
             $.ajax({
                 type: 'POST',
-                url: '@Url.Action("UploadImage","Shared")',
-                data: formData,
+                url: '@Url.Action("UploadImage", "Shared")',
                 dataType: 'json',
+                data: formData,
                 contentType: false,
                 processData: false
             })
             .done(function (response) {
-                debugger;
                 console.log(response);
-                if (response.Success)
-                {
+
+                if (response.Success) {
                     $("#ImageURL").val(response.ImageURL);
-                    $("#categoryimage").attr("src", response.ImageURL);
+                    $("#categoryImage").attr("src", response.ImageURL);
                 }
-
             })
-
-           .fail(function (XMLHttpRequest, textStatus, errorThrown) {
-
-           });
-
+            .fail(function (XMLHttpRequest, textStatus, errorThrown) {
+                alert("FAIL");
+            });
         });
 
-        $('#addCategory').validate({
+        $('#createCategory').validate({
+
             rules: {
                 Name: {
                     required: true,
@@ -112,16 +107,17 @@
         });
 
         $("#saveBtn").click(function () {
-            debugger;
-            if ($("#addCategory").valid()) {
+
+            if ($("#createCategory").valid()) {
+
                 $.ajax({
                     type: 'POST',
                     url: '@Url.Action("Create", "Category")',
-                    data: $("#addCategory").serialize()
+                    data: $("#createCategory").serialize()
                 })
                 .done(function (response) {
                     $("#tableContainer").html(response);
-                    $("#addCategory").html("");
+                    $("#actionContainer").html("");
                     focusAction("tableContainer");
                 })
                 .fail(function (XMLHttpRequest, textStatus, errorThrown) {
@@ -136,23 +132,20 @@
             }
             else {
                 swal({
-                    title: "Warning",
+                    title: "JS Warning",
                     text: "Please enter all valid data in fields.",
                     icon: "warning",
                     buttons: true,
-                    dangerMode: true,
+                    dangerMode: true
                 });
             }
         });
 
         $("#cancelBtn").click(function () {
-            $("#addCategory").html("");
+            $("#actionContainer").html("");
 
             focusAction("tableContainer");
         });
 
-    })
-   
-
+    });
 </script>
-

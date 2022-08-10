@@ -1,14 +1,12 @@
 ﻿@model EditCategoryViewModel
-
 @{
     ViewBag.Title = "Edit";
 
     var trueChecked = Model.isFeatured ? "checked" : string.Empty;
     var falseChecked = !Model.isFeatured ? "checked" : string.Empty;
 
-    var imageUrl = !string.IsNullOrEmpty(Model.ImageURL) ? Model.ImageURL : "/Content/images/system/placeholder-image.png";
+    var imageURL = !string.IsNullOrEmpty(Model.ImageURL) ? Model.ImageURL : "/Content/images/system/placeholder-image.png";
 }
-
 <h2>Edit Category</h2>
 
 <form id="editCategory">
@@ -42,7 +40,7 @@
         </div>
         <div class="col-md-4">
             <div class="thumb">
-                <img src="@imageUrl" class="img-thumbnail img-fluid" id="categoryImage" />
+                <img src="@imageURL" class="img-thumbnail img-fluid" id="categoryImage" />
             </div>
         </div>
     </div>
@@ -56,7 +54,7 @@
     $(document).ready(function () {
 
         $("#imageUpload").change(function () {
-            debugger;
+
             var element = this;
 
             var formData = new FormData();
@@ -71,49 +69,86 @@
             $.ajax({
                 type: 'POST',
                 url: '@Url.Action("UploadImage", "Shared")',
-                data: formData,
                 dataType: 'json',
+                data: formData,
                 contentType: false,
                 processData: false
             })
             .done(function (response) {
-                debugger;
                 console.log(response);
-                if (response.Success)
-                {
+
+                if (response.Success) {
                     $("#ImageURL").val(response.ImageURL);
-                    $("#categoryimage").attr("src", response.ImageURL);
+                    $("#categoryImage").attr("src", response.ImageURL);
                 }
-
-            })
-           .fail(function (XMLHttpRequest, textStatus, errorThrown) {
-               console.log("fail");
-           });
-
-        });
-
-        $("#updateBtn").click(function () {
-            $.ajax({
-                type: 'POST',
-                url: '@Url.Action("Edit", "Category")',
-                data: $("#editCategory").serialize()
-            })
-            .done(function (response) {
-                $("#tableContainer").html(response);
-                $("#addCategory").html("");
-                focusAction("tableContainer");
             })
             .fail(function (XMLHttpRequest, textStatus, errorThrown) {
-                console.log("fail");
+                alert("FAIL");
             });
-
         });
+
+        $('#editCategory').validate({
+            rules: {
+                Name: {
+                    required: true,
+                    minlength: 5,
+                    maxlength: 50,
+                },
+                Description: {
+                    maxlength: 500
+                }
+            },
+            messages: {
+                Name: {
+                    required: 'Name is required',
+                    minlength: 'Minimum Length is 5',
+                    maxlength: 'Maximum Length is 50'
+                },
+                Description: {
+                    maxlength: 'Maximum Length is 500'
+                }
+            }
+        });
+
+
+        $("#updateBtn").click(function () {
+            if ($("#editCategory").valid()) {
+                $.ajax({
+                    type: 'POST',
+                    url: '@Url.Action("Edit", "Category")',
+                    data: $("#editCategory").serialize()
+                })
+                .done(function (response) {
+                    $("#tableContainer").html(response);
+                    $("#actionContainer").html("");
+                    focusAction("tableContainer");
+                })
+                .fail(function (XMLHttpRequest, textStatus, errorThrown) {
+                    swal({
+                        title: "Warning",
+                        text: "Please enter all required fields.",
+                        icon: "warning",
+                        buttons: true,
+                        dangerMode: true,
+                    });
+                });
+            }
+            else {
+                swal({
+                    title: "JS Warning",
+                    text: "Enter valid data in fields.",
+                    icon: "warning",
+                    buttons: true,
+                    dangerMode: true
+                });
+            }
+        });
+
 
         $("#cancelBtn").click(function () {
-            $("#addCategory").html("");
+            $("#actionContainer").html("");
             focusAction("tableContainer");
         });
-    })
 
-
+    });
 </script>

@@ -5,6 +5,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Data.Entity;
 
 namespace ClothBazar.Services
 {
@@ -35,11 +36,47 @@ namespace ClothBazar.Services
             }
         }
 
-        public List<Category> GetCategories()
+        public int GetCategoriesCount(string search)
         {
             using (var context = new CBContext())
             {
-                return context.Categories.ToList();
+                if (string.IsNullOrEmpty(search) == false)
+                {
+                    return context.Categories.Where(c => c.Name != null &&
+                           c.Name.ToLower().Contains(search.ToLower())).Count();
+                }
+                else
+                {
+                    return context.Categories.Count();
+                }
+                
+            }
+        }
+
+        public List<Category> GetCategories(string search, int pageNo)
+        {
+            int pageSize = int.Parse(ConfigurationService.Instance.GetConfigs("ListingPageSize").Value);
+
+            using (var context = new CBContext())
+            {
+                if (!string.IsNullOrEmpty(search))
+                {
+                    return context.Categories.Where(category => category.Name != null &&
+                         category.Name.ToLower().Contains(search.ToLower()))
+                         .OrderBy(x => x.ID)
+                         .Skip((pageNo - 1) * pageSize)
+                         .Take(pageSize)
+                         .Include(x => x.Products)
+                         .ToList();
+                }
+                else
+                {
+                    return context.Categories
+                           .OrderBy(x => x.ID)
+                           .Skip((pageNo - 1) * pageSize)
+                           .Take(pageSize)
+                           .Include(x => x.Products).ToList();
+                }
             }
         }
 
@@ -47,8 +84,7 @@ namespace ClothBazar.Services
         {
             using (var context = new CBContext())
             {
-                return context.Categories
-                        .ToList();
+                return context.Categories.ToList();
             }
         }
 
@@ -71,11 +107,11 @@ namespace ClothBazar.Services
             }
         }
 
-        public void UpdateCategory(Category cateogry)
+        public void UpdateCategory(Category category)
         {
             using (var context = new CBContext())
             {
-                context.Entry(cateogry).State = System.Data.Entity.EntityState.Modified;
+                context.Entry(category).State = System.Data.Entity.EntityState.Modified;
 
                 context.SaveChanges();
             }

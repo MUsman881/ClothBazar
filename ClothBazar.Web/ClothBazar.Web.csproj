@@ -185,6 +185,7 @@
     <Compile Include="ViewModels\CategoryViewModels.cs" />
     <Compile Include="ViewModels\HomeViewModels.cs" />
     <Compile Include="ViewModels\ProductViewModel.cs" />
+    <Compile Include="ViewModels\SharedViewModel.cs" />
     <Compile Include="ViewModels\ShopViewModels.cs" />
   </ItemGroup>
   <ItemGroup>

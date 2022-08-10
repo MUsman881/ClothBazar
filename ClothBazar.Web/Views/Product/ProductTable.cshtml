@@ -3,8 +3,6 @@
     ViewBag.Title = "ProductTable";
 }
 
-<link rel="stylesheet" type="text/css" href="//cdn.datatables.net/1.12.1/css/jquery.dataTables.min.css">
-
 
 <div>
     <form method="post">
@@ -67,8 +65,7 @@
                         <td>@product.Price</td>
                         <td class="wrap-td">
                             <button class="editBtn" data-id="@product.ID">Edit</button>
-                            <button class="deleteBtn" data-id="@product.ID">Delete</button>
-                            <button class="addtoCart" data-id="@product.ID">Add To Cart</button>
+                            <button class="deleteBtn" data-id="@product.ID">Delete</button
                         </td>
                     </tr>
                 }    
@@ -82,7 +79,10 @@
         </tbody>
     </table>
     <div>
-        <button class="pageButtons" data-pageNo="@(Model.PageNo - 1)">Previous</button>
+        @if (Model.PageNo != 1)
+        {
+            <button class="pageButtons" data-pageNo="@(Model.PageNo - 1)">Previous</button>
+        }
         <button class="pageButtons" data-pageNo="@(Model.PageNo + 1)">Next</button>
     </div>
 
@@ -93,14 +93,8 @@
 
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-validate/1.17.0/jquery.validate.min.js"></script>
 
-<script src="https://cdn.datatables.net/1.12.1/js/jquery.dataTables.min.js"></script>
-
     <script>
         $(document).ready(function () {
-
-
-           // $("#ProductsTable").DataTable();
-
 
             $(".pageButtons").click(function () {
 

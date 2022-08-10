@@ -122,7 +122,9 @@
 
 
             $("#updateBtn").click(function () {
-                if ($("#editProduct").valid()) {
+
+                if($("#editProduct").valid()) {
+
                     $.ajax({
                         type: 'POST',
                         url: '@Url.Action("Edit", "Product")',

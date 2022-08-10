@@ -6,6 +6,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Web;
 using System.Web.Mvc;
+using System.Data.Entity;
 
 namespace ClothBazar.Web.Controllers
 {
@@ -20,19 +21,27 @@ namespace ClothBazar.Web.Controllers
         }
 
         #region CategoryTable
-        public ActionResult CategoryTable(string search)
+        public ActionResult CategoryTable(string search, int? pageNo)
         {
             CategorySearchViewModel model = new CategorySearchViewModel();
-            model.Categories = CategoriesService.Instance.GetCategories();
+            int pageSize = int.Parse(ConfigurationService.Instance.GetConfigs("ListingPageSize").Value);
+            model.SearchTerm = search;
 
-            if (string.IsNullOrEmpty(search) == false)
-            {
-                model.SearchTerm = search;
-                model.Categories = model.Categories.Where(c => c.Name != null && c.Name.ToLower().Contains(search.ToLower())).ToList();
+            pageNo = pageNo.HasValue ? pageNo.Value > 0 ? pageNo.Value : 1 : 1;
 
+            var totalRecords = CategoriesService.Instance.GetCategoriesCount(search);
+            model.Categories = CategoriesService.Instance.GetCategories(search, pageNo.Value);
+
+            if (model.Categories != null)
+            {   
+                model.Pager = new Pager(totalRecords, pageNo, pageSize);
+                
+                return PartialView(model);
             }
-
-            return PartialView("Categorytable", model);
+            else
+            {
+                return HttpNotFound();
+            }
         }
         #endregion
 
@@ -40,7 +49,8 @@ namespace ClothBazar.Web.Controllers
         [HttpGet]
         public ActionResult Create()
         {
-            return PartialView();
+            NewCategoryViewModel model = new NewCategoryViewModel();
+            return PartialView(model);
         }
 
         [HttpPost]
@@ -85,6 +95,8 @@ namespace ClothBazar.Web.Controllers
         [HttpPost]
         public ActionResult Edit(EditCategoryViewModel model)
         {
+            if(ModelState.IsValid)
+            { 
             var existingCategory = CategoriesService.Instance.GetCategory(model.ID);
 
             existingCategory.Name = model.Name;
@@ -95,6 +107,11 @@ namespace ClothBazar.Web.Controllers
             CategoriesService.Instance.UpdateCategory(existingCategory);
 
             return RedirectToAction("CategoryTable");
+            }
+            else
+            {
+                return new HttpStatusCodeResult(500);
+            }
         }
         #endregion
 

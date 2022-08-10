@@ -48,13 +48,13 @@ namespace ClothBazar.Services
 
         public List<Product> GetProducts(int pageNo)
         {
-            int pageSize = 10;
+            int pageSize = int.Parse(ConfigurationService.Instance.GetConfigs("ListingPageSize").Value);
 
             using (var context = new CBContext())
             {
-                return context.Products.Include(p => p.CategoryID).ToList();
+                //return context.Products.Include(p => p.CategoryID).ToList();
 
-                //return context.Products.OrderBy(x => x.ID).Skip((pageNo - 1) * pageSize).Take(pageSize).Include(p => p.Category).ToList();
+                return context.Products.OrderBy(x => x.ID).Skip((pageNo - 1) * pageSize).Take(pageSize).Include(p => p.Category).ToList();
             }
         }
 
@@ -62,7 +62,7 @@ namespace ClothBazar.Services
         {
             using (var context = new CBContext())
             {
-                context.Entry(product).State = System.Data.Entity.EntityState.Unchanged;
+                context.Entry(product.Category).State = System.Data.Entity.EntityState.Unchanged;
 
                 context.Products.Add(product);
 

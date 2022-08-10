@@ -72,6 +72,14 @@
     <Compile Include="Migrations\202208091317032_imageURLinProduct.Designer.cs">
       <DependentUpon>202208091317032_imageURLinProduct.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\202208092214472_categoryIDinProduct.cs" />
+    <Compile Include="Migrations\202208092214472_categoryIDinProduct.Designer.cs">
+      <DependentUpon>202208092214472_categoryIDinProduct.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\202208101034058_addBasicValidation.cs" />
+    <Compile Include="Migrations\202208101034058_addBasicValidation.Designer.cs">
+      <DependentUpon>202208101034058_addBasicValidation.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
@@ -100,6 +108,12 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\202208091317032_imageURLinProduct.resx">
       <DependentUpon>202208091317032_imageURLinProduct.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202208092214472_categoryIDinProduct.resx">
+      <DependentUpon>202208092214472_categoryIDinProduct.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202208101034058_addBasicValidation.resx">
+      <DependentUpon>202208101034058_addBasicValidation.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
