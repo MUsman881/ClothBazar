@@ -122,7 +122,7 @@ namespace ClothBazar.Web.Controllers
 
             CategoriesService.Instance.DeleteCategory(category.ID);
 
-            return RedirectToAction("Index");
+            return RedirectToAction("CategoryTable");
         }
         #endregion
 

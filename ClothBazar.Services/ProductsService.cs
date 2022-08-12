@@ -37,7 +37,6 @@ namespace ClothBazar.Services
             }
         }
 
-
         public List<Product> GetProducts(List<int> IDs)
         {
             using (var context = new CBContext())
@@ -52,9 +51,30 @@ namespace ClothBazar.Services
 
             using (var context = new CBContext())
             {
-                //return context.Products.Include(p => p.CategoryID).ToList();
-
                 return context.Products.OrderBy(x => x.ID).Skip((pageNo - 1) * pageSize).Take(pageSize).Include(p => p.Category).ToList();
+            }
+        }
+
+        public List<Product> GetProducts(int pageNo, int pageSize)
+        {
+            using (var context = new CBContext())
+            {
+                return context.Products.OrderByDescending(x => x.ID).Skip((pageNo - 1) * pageSize).Take(pageSize).Include(p => p.Category).ToList();
+            }
+        }
+
+        public List<Product> GetProductsByCategory(int categoryID , int pageSize)
+        {
+            using (var context = new CBContext())
+            {
+                return context.Products.Where(p => p.CategoryID == categoryID).OrderByDescending(x => x.ID).Take(pageSize).Include(p => p.Category).ToList();
+            }
+        }
+        public List<Product> GetLatestProducts(int numofProducts)
+        {
+            using (var context = new CBContext())
+            {
+                return context.Products.OrderByDescending(x => x.ID).Take(numofProducts).Include(c => c.Category).ToList();
             }
         }
 

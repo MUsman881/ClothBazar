@@ -64,30 +64,56 @@
         </tbody>
     </table>
 
-    <div>
-        @if (Model.Pager != null && Model.Pager.TotalPages > 1)
-        {
-
-            if (Model.Pager.CurrentPage > 1)
+    <div class="product-pagination text-center margin-top-11 clearfix">
+        <ul class="flat-pagination">
+            @if (Model.Pager != null && Model.Pager.TotalPages > 1)
             {
-                <button class="pageButtons" data-pageno="1">First</button>
-                <button class="pageButtons" data-pageno="@(Model.Pager.CurrentPage - 1)">Previous</button>}
 
-            for (var page = Model.Pager.StartPage; page <= Model.Pager.EndPage; page++)
-            {
-                string activeClass = Model.Pager.CurrentPage == page ? "active bg-info" : string.Empty;
+                if (Model.Pager.CurrentPage > 1)
+                {
+                        <li class="prev">
+                            <a style="cursor:pointer;" class="pageButtons prev" data-pageno="@(Model.Pager.CurrentPage - 1)"><i class="fa fa-angle-left"></i></a>
+                        </li>
+                }
 
+                for (var page = Model.Pager.StartPage; page <= Model.Pager.EndPage; page++)
+                {
+                    string activeClass = Model.Pager.CurrentPage == page ? "active" : string.Empty;
 
-                <button class="@activeClass pageButtons" data-pageno="@page">@page</button>}
+                    <li class="@activeClass">
+                        <a style="cursor:pointer;" class="pageButtons prev" data-pageno="@page">@page</a>
+                    </li>
 
-            if (Model.Pager.CurrentPage < Model.Pager.TotalPages)
-            {
-                <button class="pageButtons" data-pageno="@(Model.Pager.CurrentPage + 1)">Next</button>
-                <button class="pageButtons" data-pageno="@Model.Pager.EndPage">Last</button>}
-        }
+                    //<button class="@activeClass pageButtons" data-pageno="@page">@page</button>
+
+                }
+
+                if (Model.Pager.CurrentPage < Model.Pager.TotalPages)
+                {
+                    //<button class="pageButtons" data-pageno="@(Model.Pager.CurrentPage + 1)">Next</button>
+                    
+                        <li>
+                            <a style="cursor:pointer;" class="pageButtons prev" data-pageno="@(Model.Pager.CurrentPage + 1)"><i class="fa fa-angle-right"></i></a>
+                        </li>
+
+                }
+            }
+        </ul>
     </div>
 </div>
 
+
+@*<div class="product-pagination text-center margin-top-11 clearfix">
+        <ul class="flat-pagination">
+            <li class="prev">
+                <a href="#"><i class="fa fa-angle-left"></i></a>
+            </li>
+            <li><a href="#">1</a></li>
+            <li class="active"><a href="#" title="">2</a></li>
+            <li><a href="#">3</a></li>
+            <li><a href="#"><i class="fa fa-angle-right"></i></a></li>
+        </ul> /.flat-pagination
+    </div>*@
 
 <script>
 
@@ -177,34 +203,36 @@
         $(".deleteBtn").click(function () {
 
             swal({
-                    title: "Confirm?",
-                    text: "Are you sure you want to delete this product?",
-                    icon: "warning",
-                    buttons: true,
-                    dangerMode: true,
-                })
-                .then((willDelete) => {
-                    if (willDelete) {
-                        $.ajax({
-                            type: 'POST',
-                            url: '@Url.Action("Delete", "Category")',
-                            data: {
-                                ID: $(this).attr('data-id')
-                            }
-                        })
-                        .done(function (response) {
-                            $("#tableContainer").html(response);
+                title: "Confirm?",
+                text: "Are you sure you want to delete this product?",
+                icon: "warning",
+                buttons: true,
+                dangerMode: true,
+            })
+            .then((willDelete) => {
+                if (willDelete) {
+                    $.ajax({
+                        type: 'POST',
+                        url: '@Url.Action("Delete", "Category")',
+                        data: {
+                            ID: $(this).attr('data-id')
+                        }
+                    })
+                    .done(function (response) {
+                        $("#tableContainer").html(response);
 
-                            swal("Record deleted Successfully.", {
-                                icon: "success",
-                            });
-                        })
-                        .fail(function (XMLHttpRequest, textStatus, errorThrown) {
-                            alert("FAIL");
+                        swal("Record deleted Successfully.", {
+                            icon: "success",
                         });
+                    })
+                    .fail(function (XMLHttpRequest, textStatus, errorThrown) {
+                        alert("FAIL");
+                    });
 
-                    }
-                });
+                }
+            });
+
+
         });
 
     });

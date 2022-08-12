@@ -1,9 +1,7 @@
-﻿@model ClothBazar.Web.ViewModels.HomeViewModels
+﻿@model HomeViewModels
 @{
     ViewBag.Title = "Home Page";
 }
-
-
 <!-- SLIDER -->
 <div class="rev_slider_wrapper fullwidthbanner-container">
     <div id="rev-slider1" class="rev_slider fullwidthabanner">
@@ -11,8 +9,7 @@
             <!-- Slide 1 -->
             <li data-transition="random">
                 <!-- Main Image -->
-                <img src="~/Content/Images/slider/slider-bg-5.jpg" alt="" data-bgposition="center center" data-no-retina>
-
+                <img src="~/Content/images/slider/slider-bg-5.jpg" alt="" data-bgposition="center center" data-no-retina>
                 <!-- Layers -->
                 <div class="tp-caption tp-resizeme text-white font-weight-300"
                      data-x="['left','left','left','center']" data-hoffset="['0','0','0','0']"
@@ -33,7 +30,6 @@
                      data-responsive_offset="on">
                     NEW TREND 2018
                 </div>
-
                 <div class="tp-caption tp-resizeme text-white font-weight-500"
                      data-x="['left','left','left','center']" data-hoffset="['0','0','0','0']"
                      data-y="['middle','middle','middle','middle']" data-voffset="['-42','-42','-42','-42']"
@@ -53,7 +49,6 @@
                      data-responsive_offset="on">
                     New Collection
                 </div>
-
                 <div class="tp-caption tp-resizeme text-white font-weight-400 "
                      data-x="['left','left','left','center']" data-hoffset="['0','0','0','0']"
                      data-y="['middle','middle','middle','middle']" data-voffset="['12','12','12','12']"
@@ -73,7 +68,6 @@
                      data-responsive_offset="on">
                     BIG SALE OF THIS WEEK UP TO 30%
                 </div>
-
                 <div class="tp-caption"
                      data-x="['left','left','left','center']" data-hoffset="['0','0','0','0']"
                      data-y="['middle','middle','middle','middle']" data-voffset="['80','80','80','80']"
@@ -96,8 +90,7 @@
             <!-- Slide 2 -->
             <li data-transition="random">
                 <!-- Main Image -->
-                <img src="~/Content/Images/slider/slider-bg-1.jpg" alt="" data-bgposition="center center" data-no-retina>
-
+                <img src="~/Content/images/slider/slider-bg-1.jpg" alt="" data-bgposition="center center" data-no-retina>
                 <!-- Layers -->
                 <div class="tp-caption tp-resizeme text-333 font-weight-400 text-right"
                      data-x="['right','right','right','center']" data-hoffset="['33','33','33','0']"
@@ -118,7 +111,6 @@
                      data-responsive_offset="on">
                     <span class="text-line left"></span>Summer Fashion<span class="text-line right"></span>
                 </div>
-
                 <div class="tp-caption tp-resizeme text-333 font-weight-500 letter-spacing-10 text-right"
                      data-x="['right','right','right','center']" data-hoffset="['13','13','13','0']"
                      data-y="['middle','middle','middle','middle']" data-voffset="['-39','-39','-39','-59']"
@@ -138,7 +130,6 @@
                      data-responsive_offset="on">
                     SALE
                 </div>
-
                 <div class="tp-caption tp-resizeme text-333 font-weight-400 text-right"
                      data-x="['right','right','right','center']" data-hoffset="['13','13','13','0']"
                      data-y="['middle','middle','middle','middle']" data-voffset="['50','50','50','5']"
@@ -158,7 +149,6 @@
                      data-responsive_offset="on">
                     UP TO <span class="text-accent">30%</span> OFF
                 </div>
-
                 <div class="tp-caption text-right"
                      data-x="['right','right','right','center']" data-hoffset="['105','105','105','0']"
                      data-y="['middle','middle','middle','middle']" data-voffset="['138','138','138','80']"
@@ -182,7 +172,6 @@
     </div>
 </div>
 <!-- END SLIDER -->
-
 @if (Model.FeaturedCategories != null & Model.FeaturedCategories.Count >= 4)
 {
     var firstCategory = Model.FeaturedCategories[0];
@@ -269,8 +258,6 @@
     </section>
 	<!-- END IMAGE BOX -->
 }
-
-
 <!-- PRODUCT NEW -->
 <section class="flat-row row-product-new">
     <div class="container">
@@ -281,126 +268,8 @@
                         New Product
                     </h2>
                 </div>
-                <div class="product-content product-fourcolumn clearfix">
-                    <ul class="product style2 clearfix">
-                        <li class="product-item">
-                            <div class="product-thumb clearfix">
-                                <a href="#" class="product-thumb">
-                                    <img src="~/Content/Images/shop/sh-4/13.jpg" alt="image">
-                                </a>
-                                <span class="new">New</span>
-                            </div>
-                            <div class="product-info text-center clearfix">
-                                <span class="product-title">Cotton White Underweaer Block Out Edition</span>
-                                <div class="price">
-                                    <ins>
-                                        <span class="amount">$100.00</span>
-                                    </ins>
-                                </div>
-                                <ul class="flat-color-list width-14">
-                                    <li>
-                                        <a href="#" class="red"></a>
-                                    </li>
-                                    <li>
-                                        <a href="#" class="blue"></a>
-                                    </li>
-                                    <li>
-                                        <a href="#" class="black"></a>
-                                    </li>
-                                </ul>
-                            </div>
-                            <div class="add-to-cart text-center">
-                                <a href="#">ADD TO CART</a>
-                            </div>
-                            <a href="#" class="like"><i class="fa fa-heart-o"></i></a>
-                        </li>
 
-                        <li class="product-item">
-                            <div class="product-thumb clearfix">
-                                <a href="#" class="product-thumb">
-                                    <img src="~/Content/Images/shop/sh-4/14.jpg" alt="image">
-                                </a>
-                                <span class="new">New</span>
-                            </div>
-                            <div class="product-info clearfix">
-                                <span class="product-title">Cotton White Underweaer Block Out Edition</span>
-                                <div class="price">
-                                    <ins>
-                                        <span class="amount">$100.00</span>
-                                    </ins>
-                                </div>
-                                <ul class="flat-color-list width-14">
-                                    <li>
-                                        <a href="#" class="red"></a>
-                                    </li>
-                                    <li>
-                                        <a href="#" class="blue"></a>
-                                    </li>
-                                    <li>
-                                        <a href="#" class="black"></a>
-                                    </li>
-                                </ul>
-                            </div>
-                            <div class="add-to-cart text-center">
-                                <a href="#">ADD TO CART</a>
-                            </div>
-                            <a href="#" class="like"><i class="fa fa-heart-o"></i></a>
-                        </li>
-                        <li class="product-item">
-                            <div class="product-thumb clearfix">
-                                <a href="#" class="product-thumb">
-                                    <img src="~/Content/Images/shop/sh-4/15.jpg" alt="image">
-                                </a>
-                                <span class="new sale">Sale</span>
-                            </div>
-                            <div class="product-info clearfix">
-                                <span class="product-title">Cotton White Underweaer Block Out Edition</span>
-                                <div class="price">
-                                    <del>
-                                        <span class="regular">$150.00</span>
-                                    </del>
-                                    <ins>
-                                        <span class="amount">$100.00</span>
-                                    </ins>
-                                </div>
-                            </div>
-                            <div class="add-to-cart text-center">
-                                <a href="#">ADD TO CART</a>
-                            </div>
-                            <a href="#" class="like"><i class="fa fa-heart-o"></i></a>
-                        </li>
-                        <li class="product-item">
-                            <div class="product-thumb clearfix">
-                                <a href="#" class="product-thumb">
-                                    <img src="~/Content/Images/shop/sh-4/16.jpg" alt="image">
-                                </a>
-                            </div>
-                            <div class="product-info clearfix">
-                                <span class="product-title">Cotton White Underweaer Block Out Edition</span>
-                                <div class="price">
-                                    <ins>
-                                        <span class="amount">$100.00</span>
-                                    </ins>
-                                </div>
-                                <ul class="flat-color-list width-14">
-                                    <li>
-                                        <a href="#" class="red"></a>
-                                    </li>
-                                    <li>
-                                        <a href="#" class="blue"></a>
-                                    </li>
-                                    <li>
-                                        <a href="#" class="black"></a>
-                                    </li>
-                                </ul>
-                            </div>
-                            <div class="add-to-cart text-center">
-                                <a href="#">ADD TO CART</a>
-                            </div>
-                            <a href="#" class="like"><i class="fa fa-heart-o"></i></a>
-                        </li>
-                    </ul>
-                </div>
+                @{Html.RenderAction("Products", "Widgets", new { isLatestProducts = true });}
             </div>
         </div><!-- /.row -->
     </div><!-- /.container -->
@@ -434,221 +303,15 @@
                 <div class="title-section margin-bottom-41">
                     <h2 class="title">Best Sale</h2>
                 </div>
-                <ul class="flat-filter style-1 text-center max-width-682 clearfix">
-                    <li class="active"><a href="#" data-filter="*">All Product</a></li>
-                    <li><a href="#" data-filter=".kid">For Kid’s</a></li>
-                    <li><a href="#" data-filter=".man">For Man’s</a></li>
-                    <li><a href="#" data-filter=".woman">For Woman’s</a></li>
-                    <li><a href="#" data-filter=".accessories">Accessories</a></li>
-                </ul>
-                <div class="divider h54"></div>
-                <div class="product-content product-fourcolumn clearfix">
-                    <ul class="product style2 isotope-product clearfix">
-                        <li class="product-item kid woman">
-                            <div class="product-thumb clearfix">
-                                <a href="#">
-                                    <img src="~/Content/Images/shop/sh-4/1.jpg" alt="image">
-                                </a>
-                            </div>
-                            <div class="product-info clearfix">
-                                <span class="product-title">Cotton White Underweaer Block Out Edition</span>
-                                <div class="price">
-                                    <ins>
-                                        <span class="amount">$100.00</span>
-                                    </ins>
-                                </div>
-                                <ul class="flat-color-list width-14">
-                                    <li>
-                                        <a href="#" class="red"></a>
-                                    </li>
-                                    <li>
-                                        <a href="#" class="blue"></a>
-                                    </li>
-                                    <li>
-                                        <a href="#" class="black"></a>
-                                    </li>
-                                </ul>
-                            </div>
-                            <div class="add-to-cart text-center">
-                                <a href="#">ADD TO CART</a>
-                            </div>
-                            <a href="#" class="like"><i class="fa fa-heart-o"></i></a>
-                        </li>
-                        <li class="product-item man accessories">
-                            <div class="product-thumb clearfix">
-                                <a href="#">
-                                    <img src="~/Content/Images/shop/sh-4/2.jpg" alt="image">
-                                </a>
-                                <span class="new">New</span>
-                            </div>
-                            <div class="product-info clearfix">
-                                <span class="product-title">Cotton White Underweaer Block Out Edition</span>
-                                <div class="price">
-                                    <ins>
-                                        <span class="amount">$100.00</span>
-                                    </ins>
-                                </div>
-                            </div>
-                            <div class="add-to-cart text-center">
-                                <a href="#">ADD TO CART</a>
-                            </div>
-                            <a href="#" class="like"><i class="fa fa-heart-o"></i></a>
-                        </li>
-                        <li class="product-item kid woman">
-                            <div class="product-thumb clearfix">
-                                <a href="#" class="product-thumb">
-                                    <img src="~/Content/Images/shop/sh-4/3.jpg" alt="image">
-                                </a>
-                            </div>
-                            <div class="product-info clearfix">
-                                <span class="product-title">Cotton White Underweaer Block Out Edition</span>
-                                <div class="price">
-                                    <ins>
-                                        <span class="amount">$100.00</span>
-                                    </ins>
-                                </div>
-                            </div>
-                            <div class="add-to-cart text-center">
-                                <a href="#">ADD TO CART</a>
-                            </div>
-                            <a href="#" class="like"><i class="fa fa-heart-o"></i></a>
-                        </li>
-                        <li class="product-item man accessories">
-                            <div class="product-thumb clearfix">
-                                <a href="#" class="product-thumb">
-                                    <img src="~/Content/Images/shop/sh-4/4.jpg" alt="image">
-                                </a>
-                                <span class="new sale">Sale</span>
-                            </div>
-                            <div class="product-info clearfix">
-                                <span class="product-title">Cotton White Underweaer Block Out Edition</span>
-                                <div class="price">
-                                    <del>
-                                        <span class="regular">$120.00</span>
-                                    </del>
-                                    <ins>
-                                        <span class="amount">$100.00</span>
-                                    </ins>
-                                </div>
-                                <ul class="flat-color-list width-14">
-                                    <li>
-                                        <a href="#" class="red"></a>
-                                    </li>
-                                    <li>
-                                        <a href="#" class="blue"></a>
-                                    </li>
-                                    <li>
-                                        <a href="#" class="black"></a>
-                                    </li>
-                                </ul>
-                            </div>
-                            <div class="add-to-cart text-center">
-                                <a href="#">ADD TO CART</a>
-                            </div>
-                            <a href="#" class="like"><i class="fa fa-heart-o"></i></a>
-                        </li>
-                        <li class="product-item kid woman">
-                            <div class="product-thumb clearfix">
-                                <a href="#" class="product-thumb">
-                                    <img src="~/Content/Images/shop/sh-4/5.jpg" alt="image">
-                                </a>
-                                <span class="new">New</span>
-                            </div>
-                            <div class="product-info clearfix">
-                                <span class="product-title">Cotton White Underweaer Block Out Edition</span>
-                                <div class="price">
-                                    <ins>
-                                        <span class="amount">$100.00</span>
-                                    </ins>
-                                </div>
-                            </div>
-                            <div class="add-to-cart text-center">
-                                <a href="#">ADD TO CART</a>
-                            </div>
-                            <a href="#" class="like"><i class="fa fa-heart-o"></i></a>
-                        </li>
-                        <li class="product-item man accessories">
-                            <div class="product-thumb clearfix">
-                                <a href="#" class="product-thumb">
-                                    <img src="~/Content/Images/shop/sh-4/6.jpg" alt="image">
-                                </a>
-                                <span class="new sale">Sale</span>
-                            </div>
-                            <div class="product-info clearfix">
-                                <span class="product-title">Cotton White Underweaer Block Out Edition</span>
-                                <div class="price">
-                                    <del>
-                                        <span class="regular">$150.00</span>
-                                    </del>
-                                    <ins>
-                                        <span class="amount">$100.00</span>
-                                    </ins>
-                                </div>
-                                <ul class="flat-color-list width-14">
-                                    <li>
-                                        <a href="#" class="red"></a>
-                                    </li>
-                                    <li>
-                                        <a href="#" class="blue"></a>
-                                    </li>
-                                    <li>
-                                        <a href="#" class="black"></a>
-                                    </li>
-                                </ul>
-                            </div>
-                            <div class="add-to-cart text-center">
-                                <a href="#">ADD TO CART</a>
-                            </div>
-                            <a href="#" class="like"><i class="fa fa-heart-o"></i></a>
-                        </li>
-                        <li class="product-item kid woman">
-                            <div class="product-thumb clearfix">
-                                <a href="#" class="product-thumb">
-                                    <img src="~/Content/Images/shop/sh-4/7.jpg" alt="image">
-                                </a>
-                            </div>
-                            <div class="product-info clearfix">
-                                <span class="product-title">Cotton White Underweaer Block Out Edition</span>
-                                <div class="price">
-                                    <ins>
-                                        <span class="amount">$100.00</span>
-                                    </ins>
-                                </div>
-                            </div>
-                            <div class="add-to-cart text-center">
-                                <a href="#">ADD TO CART</a>
-                            </div>
-                            <a href="#" class="like"><i class="fa fa-heart-o"></i></a>
-                        </li>
-                        <li class="product-item man accessories">
-                            <div class="product-thumb clearfix">
-                                <a href="#" class="product-thumb">
-                                    <img src="~/Content/Images/shop/sh-4/8.jpg" alt="image">
-                                </a>
-                                <span class="new">New</span>
-                            </div>
-                            <div class="product-info clearfix">
-                                <span class="product-title">Cotton White Underweaer Block Out Edition</span>
-                                <div class="price">
-                                    <ins>
-                                        <span class="amount">$100.00</span>
-                                    </ins>
-                                </div>
-                            </div>
-                            <div class="add-to-cart text-center">
-                                <a href="#">ADD TO CART</a>
-                            </div>
-                            <a href="#" class="like"><i class="fa fa-heart-o"></i></a>
-                        </li>
-                    </ul>
-                </div>
+
+                @{Html.RenderAction("Products", "Widgets", new { isLatestProducts = false });}
             </div>
         </div>
     </div>
 </section>
 <!-- END PRODUCT -->
 <!-- ICON BOX -->
-<section class="flat-row row-icon-box bg-section bg-color-f5f">
+<section class="flat-row row-icon-box bg-section bg-color-f5f" style="margin-bottom: 2rem;">
     <div class="container">
         <div class="row">
             <div class="col-md-3">
@@ -707,173 +370,3 @@
     </div>
 </section>
 <!-- END ICON BOX -->
-<!-- NEW LATEST -->
-<section class="flat-row row-new-latest">
-    <div class="container">
-        <div class="row">
-            <div class="col-md-12">
-                <div class="title-section margin-bottom-40">
-                    <h2 class="title">New Latest</h2>
-                </div>
-                <div class="new-latest-wrap">
-                    <div class="flat-new-latest flat-carousel-box post-wrap style3 data-effect clearfix" data-auto="false" data-column="3" data-column2="2" data-column3="1" data-gap="30">
-                        <div class="owl-carousel owl-theme">
-                            <article class="post clearfix">
-                                <div class="featured-post data-effect-item">
-                                    <img src="~/Content/Images/blog/new-lastest-1-370x280.jpg" alt="image">
-                                    <div class="content-post text-center">
-                                        <div class="title-post">
-                                            <h2><a href="blog-detail.html">Trend Of 2018</a></h2>
-                                        </div><!-- /.title-post -->
-                                        <ul class="meta-post">
-                                            <li class="date">
-                                                OCT 08, 2018
-                                            </li>
-                                            <li class="author">
-                                                <a href="#">BY ADMIN</a>
-                                            </li>
-                                        </ul><!-- /.meta-post -->
-                                        <div class="entry-post">
-                                            <p>This is Heading the bank manager long ago won the battle for the heart of...</p>
-                                            <div class="more-link">
-                                                <a href="blog-detail.html">READ MORE</a>
-                                            </div>
-                                        </div>
-                                    </div><!-- /.content-post -->
-                                    <div class="overlay-effect bg-overlay-black"></div>
-                                </div>
-                            </article><!-- /.post -->
-                            <article class="post clearfix">
-                                <div class="featured-post data-effect-item">
-                                    <img src="~/Content/Images/blog/new-lastest-2-370x280.jpg" alt="image">
-                                    <div class="content-post text-center">
-                                        <div class="title-post">
-                                            <h2><a href="blog-detail.html">Trend Of 2018</a></h2>
-                                        </div><!-- /.title-post -->
-                                        <ul class="meta-post">
-                                            <li class="date">
-                                                OCT 08, 2018
-                                            </li>
-                                            <li class="author">
-                                                <a href="#">BY ADMIN</a>
-                                            </li>
-                                        </ul><!-- /.meta-post -->
-                                        <div class="entry-post">
-                                            <p>This is Heading the bank manager long ago won the battle for the heart of...</p>
-                                            <div class="more-link">
-                                                <a href="blog-detail.html">READ MORE</a>
-                                            </div>
-                                        </div>
-                                    </div><!-- /.content-post -->
-                                    <div class="overlay-effect bg-overlay-black"></div>
-                                </div>
-                            </article><!-- /.post -->
-                            <article class="post clearfix">
-                                <div class="featured-post data-effect-item">
-                                    <img src="~/Content/Images/blog/new-lastest-3-370x280.jpg" alt="image">
-                                    <div class="content-post text-center">
-                                        <div class="title-post">
-                                            <h2><a href="blog-detail.html">Trend Of 2018</a></h2>
-                                        </div><!-- /.title-post -->
-                                        <ul class="meta-post">
-                                            <li class="date">
-                                                OCT 08, 2018
-                                            </li>
-                                            <li class="author">
-                                                <a href="#">BY ADMIN</a>
-                                            </li>
-                                        </ul><!-- /.meta-post -->
-                                        <div class="entry-post">
-                                            <p>This is Heading the bank manager long ago won the battle for the heart of...</p>
-                                            <div class="more-link">
-                                                <a href="blog-detail.html">READ MORE</a>
-                                            </div>
-                                        </div>
-                                    </div><!-- /.content-post -->
-                                    <div class="overlay-effect bg-overlay-black"></div>
-                                </div>
-                            </article><!-- /.post -->
-                            <article class="post clearfix">
-                                <div class="featured-post data-effect-item">
-                                    <img src="~/Content/Images/blog/new-lastest-1-370x280.jpg" alt="image">
-                                    <div class="content-post text-center">
-                                        <div class="title-post">
-                                            <h2><a href="blog-detail.html">Trend Of 2018</a></h2>
-                                        </div><!-- /.title-post -->
-                                        <ul class="meta-post">
-                                            <li class="date">
-                                                OCT 08, 2018
-                                            </li>
-                                            <li class="author">
-                                                <a href="#">BY ADMIN</a>
-                                            </li>
-                                        </ul><!-- /.meta-post -->
-                                        <div class="entry-post">
-                                            <p>This is Heading the bank manager long ago won the battle for the heart of...</p>
-                                            <div class="more-link">
-                                                <a href="blog-detail.html">READ MORE</a>
-                                            </div>
-                                        </div>
-                                    </div><!-- /.content-post -->
-                                    <div class="overlay-effect bg-overlay-black"></div>
-                                </div>
-                            </article><!-- /.post -->
-                            <article class="post clearfix">
-                                <div class="featured-post data-effect-item">
-                                    <img src="~/Content/Images/blog/new-lastest-2-370x280.jpg" alt="image">
-                                    <div class="content-post text-center">
-                                        <div class="title-post">
-                                            <h2><a href="blog-detail.html">Trend Of 2018</a></h2>
-                                        </div><!-- /.title-post -->
-                                        <ul class="meta-post">
-                                            <li class="date">
-                                                OCT 08, 2018
-                                            </li>
-                                            <li class="author">
-                                                <a href="#">BY ADMIN</a>
-                                            </li>
-                                        </ul><!-- /.meta-post -->
-                                        <div class="entry-post">
-                                            <p>This is Heading the bank manager long ago won the battle for the heart of...</p>
-                                            <div class="more-link">
-                                                <a href="blog-detail.html">READ MORE</a>
-                                            </div>
-                                        </div>
-                                    </div><!-- /.content-post -->
-                                    <div class="overlay-effect bg-overlay-black"></div>
-                                </div>
-                            </article><!-- /.post -->
-                            <article class="post clearfix">
-                                <div class="featured-post data-effect-item">
-                                    <img src="~/Content/Images/blog/new-lastest-3-370x280.jpg" alt="image">
-                                    <div class="content-post text-center">
-                                        <div class="title-post">
-                                            <h2><a href="blog-detail.html">Trend Of 2018</a></h2>
-                                        </div><!-- /.title-post -->
-                                        <ul class="meta-post">
-                                            <li class="date">
-                                                OCT 08, 2018
-                                            </li>
-                                            <li class="author">
-                                                <a href="#">BY ADMIN</a>
-                                            </li>
-                                        </ul><!-- /.meta-post -->
-                                        <div class="entry-post">
-                                            <p>This is Heading the bank manager long ago won the battle for the heart of...</p>
-                                            <div class="more-link">
-                                                <a href="blog-detail.html">READ MORE</a>
-                                            </div>
-                                        </div>
-                                    </div><!-- /.content-post -->
-                                    <div class="overlay-effect bg-overlay-black"></div>
-                                </div>
-                            </article><!-- /.post -->
-                        </div><!-- /.owl-carousel -->
-                    </div>
-                </div>
-
-            </div>
-        </div>
-    </div>
-</section>
-<!-- END NEW LATEST -->

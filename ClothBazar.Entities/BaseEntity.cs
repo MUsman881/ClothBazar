@@ -12,7 +12,7 @@ namespace ClothBazar.Entities
         public int ID { get; set; }
         
         [Required]
-        [MinLength(5), MaxLength(50)]
+        [MinLength(4), MaxLength(50)]
         public string Name { get; set; }
         
         [MaxLength(500)]
