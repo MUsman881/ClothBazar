@@ -27,7 +27,63 @@ namespace ClothBazar.Services
         private ProductsService()
         {
         }
+
+
         #endregion
+
+        public List<Product> SearchProducts(string searchTerm, int? minimumPrice, int? maximumPrice, int? categoryID, int? sortBy)
+        {
+            using (var context = new CBContext())
+            {
+                var products = context.Products.ToList();
+
+                if (categoryID.HasValue)
+                {
+                    products = products.Where(x=> x.CategoryID == categoryID.Value).ToList();
+                }
+
+                if(!string.IsNullOrEmpty(searchTerm))
+                {
+                    products = products.Where(x => x.Name.ToLower().Contains(searchTerm.ToLower())).ToList();
+                }
+
+                if (minimumPrice.HasValue)
+                {
+                    products = products.Where(x => x.Price >= minimumPrice.Value).ToList();
+                }
+
+                if (maximumPrice.HasValue)
+                {
+                    products = products.Where(x => x.Price <= maximumPrice.Value).ToList();
+                }
+
+                if (sortBy.HasValue)
+                {
+                    switch (sortBy.Value)
+                    {
+                        case 2:
+                            products = products.OrderBy(x => x.ID).ToList();
+                            break;
+                        case 3:
+                            products = products.OrderBy(x => x.Price).ToList();
+                            break;
+                        default:
+                            products = products.OrderByDescending(x => x.Price).ToList();
+                            break;  
+                    }
+                }
+
+                return products;
+            }
+        }
+
+        public int GetMaximumPrice()
+        {
+            using (var context = new CBContext())
+            {
+                return (int)(context.Products.Max(x => x.Price));
+            }
+        }
 
         public Product GetProduct(int ID)
         {
@@ -70,6 +126,7 @@ namespace ClothBazar.Services
                 return context.Products.Where(p => p.CategoryID == categoryID).OrderByDescending(x => x.ID).Take(pageSize).Include(p => p.Category).ToList();
             }
         }
+
         public List<Product> GetLatestProducts(int numofProducts)
         {
             using (var context = new CBContext())

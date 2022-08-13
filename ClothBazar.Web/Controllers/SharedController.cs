@@ -9,7 +9,7 @@ namespace ClothBazar.Web.Controllers
 {
     public class SharedController : Controller
     {
-        public JsonResult UploadImage()
+        public JsonResult UploadCategoryImage()
         {
             JsonResult result = new JsonResult();
             result.JsonRequestBehavior = JsonRequestBehavior.AllowGet;
@@ -20,14 +20,40 @@ namespace ClothBazar.Web.Controllers
 
                 var fileName = Guid.NewGuid() + Path.GetExtension(file.FileName);
 
-                var path = Path.Combine(Server.MapPath("~/Content/images/"), fileName);
+                var path = Path.Combine(Server.MapPath("~/Content/images/Category"), fileName);
 
                 file.SaveAs(path);
 
-                result.Data = new { Success = true, ImageURL = string.Format("/Content/images/{0}", fileName) };
+                result.Data = new { Success = true, ImageURL = string.Format("/Content/images/Category{0}", fileName) };
 
             }
             catch(Exception ex)
+            {
+                result.Data = new { Success = false, Message = ex.Message };
+            }
+
+            return result;
+        }
+
+        public JsonResult UploadProductImage()
+        {
+            JsonResult result = new JsonResult();
+            result.JsonRequestBehavior = JsonRequestBehavior.AllowGet;
+
+            try
+            {
+                var file = Request.Files[0];
+
+                var fileName = Guid.NewGuid() + Path.GetExtension(file.FileName);
+
+                var path = Path.Combine(Server.MapPath("~/Content/images/Product"), fileName);
+
+                file.SaveAs(path);
+
+                result.Data = new { Success = true, ImageURL = string.Format("/Content/images/Product{0}", fileName) };
+
+            }
+            catch (Exception ex)
             {
                 result.Data = new { Success = false, Message = ex.Message };
             }
