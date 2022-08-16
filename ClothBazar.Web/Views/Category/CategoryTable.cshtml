@@ -84,14 +84,10 @@
                         <a style="cursor:pointer;" class="pageButtons prev" data-pageno="@page">@page</a>
                     </li>
 
-                    //<button class="@activeClass pageButtons" data-pageno="@page">@page</button>
-
                 }
 
                 if (Model.Pager.CurrentPage < Model.Pager.TotalPages)
                 {
-                    //<button class="pageButtons" data-pageno="@(Model.Pager.CurrentPage + 1)">Next</button>
-                    
                         <li>
                             <a style="cursor:pointer;" class="pageButtons prev" data-pageno="@(Model.Pager.CurrentPage + 1)"><i class="fa fa-angle-right"></i></a>
                         </li>
@@ -100,20 +96,9 @@
             }
         </ul>
     </div>
+
 </div>
 
-
-@*<div class="product-pagination text-center margin-top-11 clearfix">
-        <ul class="flat-pagination">
-            <li class="prev">
-                <a href="#"><i class="fa fa-angle-left"></i></a>
-            </li>
-            <li><a href="#">1</a></li>
-            <li class="active"><a href="#" title="">2</a></li>
-            <li><a href="#">3</a></li>
-            <li><a href="#"><i class="fa fa-angle-right"></i></a></li>
-        </ul> /.flat-pagination
-    </div>*@
 
 <script>
 
@@ -139,7 +124,7 @@
             var searchValue = $("#searchTxt").val();
 
             $.ajax({
-                url: '@Url.Action("CategoryTable", "Category")',//'/Category/CategoryTable',
+                url: '@Url.Action("CategoryTable", "Category")',
                 data: {
                     search: searchValue
                 }

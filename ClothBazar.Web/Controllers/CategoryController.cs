@@ -10,6 +10,7 @@ using System.Data.Entity;
 
 namespace ClothBazar.Web.Controllers
 {
+    //[Authorize(Roles ="Admin")]
     public class CategoryController : Controller
     {
         // GET: Category
@@ -24,7 +25,9 @@ namespace ClothBazar.Web.Controllers
         public ActionResult CategoryTable(string search, int? pageNo)
         {
             CategorySearchViewModel model = new CategorySearchViewModel();
+
             int pageSize = int.Parse(ConfigurationService.Instance.GetConfigs("ListingPageSize").Value);
+
             model.SearchTerm = search;
 
             pageNo = pageNo.HasValue ? pageNo.Value > 0 ? pageNo.Value : 1 : 1;

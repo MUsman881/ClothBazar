@@ -20,38 +20,26 @@ namespace ClothBazar.Web.Controllers
         #region ProductTable
         public ActionResult ProductTable(string search, int? pageNo)
         {
+            var pageSize = ConfigurationService.Instance.PageSize();
+
             ProductSearchViewModel model = new ProductSearchViewModel();
             model.SearchTerm = search;
 
-            model.PageNo = pageNo.HasValue ? pageNo.Value > 0 ? pageNo.Value : 1 : 1;
+            pageNo = pageNo.HasValue ? pageNo.Value > 0 ? pageNo.Value : 1 : 1;
 
-            #region ifelse similar to above
-            //if (pageNo.HasValue)
-            //{
-            //    if(pageNo.Value > 0)
-            //    {
-            //        model.PageNo = pageNo.Value;
-            //    }
-            //    else
-            //    {
-            //        model.PageNo = 1;
-            //    }
-            //}
-            //else
-            //{
-            //    model.PageNo = 1;
-            //}
-            #endregion
+            var totalRecords = ProductsService.Instance.GetProductsCount(search);
+            model.Products = ProductsService.Instance.GetProducts(search, pageNo.Value, pageSize);
 
-            model.Products = ProductsService.Instance.GetProducts(model.PageNo);
-
-            if (string.IsNullOrEmpty(search) == false)
+            if (model.Products != null)
             {
-                model.Products = model.Products.Where(p => p.Name != null && p.Name.ToLower().Contains(search.ToLower())).ToList();
+                model.Pager = new Pager(totalRecords, pageNo, pageSize);
 
+                return PartialView(model);
             }
-
-            return PartialView(model);
+            else
+            {
+                return HttpNotFound();
+            }
         }
         #endregion
 
