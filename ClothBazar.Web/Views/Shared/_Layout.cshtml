@@ -5,7 +5,6 @@
     <!-- Basic Page Needs -->
     <meta charset="utf-8">
     <!--[if IE]><meta http-equiv='X-UA-Compatible' content='IE=edge,chrome=1'><![endif]-->
-
     <!-- Mobile Specific Metas -->
     <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
     <!-- Bootstrap  -->
@@ -18,8 +17,6 @@
     <!-- Animation Style -->
     <link rel="stylesheet" type="text/css" href="~/Content/stylesheets/animate.css">
 
-
-
     <!-- Favicon and touch icons  -->
     <link href="favicon.ico" rel="shortcut icon">
     <!--[if lt IE 9]>
@@ -31,6 +28,7 @@
     <script src="~/Content/javascript/jquery-ui.js"></script>
 
 </head>
+
 
 <body class="header_sticky header-style-1 has-menu-extra">
 
@@ -60,27 +58,39 @@
                             </form>
                         </li>
 
-                    @if (User.Identity.IsAuthenticated)
-                    {
-                        <li class="box-login">
-                            <a class="icon_login" href="#"></a>
-                        </li>
-                    }
+                        @if (User.Identity.IsAuthenticated)
+                        {
+                            <li class="box-login box-cart nav-top-cart-wrapper">
+                                <a class="icon_login active" style="cursor:pointer;"></a>
+                                <div class="nav-shop-cart">
+                                    <div class="widget_shopping_cart_content">
+                                        <div class="woocommerce-min-cart-wrap">
+                                            <ul class="menu">
+                                                <li>
+                                                    <a href="/">Logout</a>
+                                                </li>
+                                            </ul>
+                                        </div><!-- /.widget_shopping_cart_content -->
+                                    </div>
+                                </div><!-- /.nav-shop-cart -->
+                            </li>
+                            @*<li class="box-login">
+                <a class="icon_login" href="#"></a>
+               @User.Identity.Name
+            </li>*@
+                        }
+                        else
+                        {
+                            <li class="box-login">
+                                <a class="icon_login" href="@Url.Action("Login","Account")"></a>
+                            </li>
+                        }
 
                         <li class="box-cart nav-top-cart-wrapper">
-                            <a class="icon_cart nav-cart-trigger active" href="#"><span></span></a>
-                            <div class="nav-shop-cart">
-                                <div class="widget_shopping_cart_content">
-                                    <div class="woocommerce-min-cart-wrap">
-                                        <ul class="woocommerce-mini-cart cart_list product_list_widget ">
-                                            <li class="woocommerce-mini-cart-item mini_cart_item">
-                                                <span>No Items in Shopping Cart</span>
-                                            </li>
-                                        </ul>
-                                    </div><!-- /.widget_shopping_cart_content -->
-                                </div>
-                            </div><!-- /.nav-shop-cart -->
+                            <a class="icon_cart nav-cart-trigger active" href="@Url.Action("Checkout", "Shop")"><span id="cartProductsCount">0</span></a>
                         </li>
+
+
                     </ul><!-- /.menu-extra -->
                     <div class="nav-wrap">
                         <nav id="mainnav" class="mainnav">
@@ -93,13 +103,6 @@
                                 </li>
                                 <li>
                                     <a href="@Url.Action("Checkout", "Shop")">CHECKOUT</a>
-                                </li>
-                                <li>
-                                    <a href="contact.html">CONTACT</a>
-                                    <ul class="submenu right-submenu">
-                                        <li><a href="contact.html">Contact Style 1</a></li>
-                                        <li><a href="contact-v2.html">Contact Style 2</a></li>
-                                    </ul>
                                 </li>
                             </ul>
                         </nav><!-- /.mainnav -->
@@ -131,9 +134,9 @@
                                 </div>
                             </form>
                             <ul class="flat-social">
-                            @{ 
-                                var facebookURL = ConfigurationService.Instance.GetConfigs("FacebookURL").Value;
-                            }
+                                @{
+                                    var facebookURL = ConfigurationService.Instance.GetConfigs("FacebookURL").Value;
+                                }
                                 <li><a href="@facebookURL"><i class="fa fa-facebook"></i></a></li>
                                 <li><a href="#"><i class="fa fa-twitter"></i></a></li>
                                 <li><a href="#"><i class="fa fa-google"></i></a></li>
@@ -144,7 +147,6 @@
                 </div>
             </div>
         </section><!-- /.mail-chimp -->
-
         <!-- Footer -->
         <footer class="footer">
             <div class="container">

@@ -1,5 +1,8 @@
 ﻿@model ProductViewModel
 
+@{ 
+    ViewBag.title = "Product Details";
+}
 
 @if(Model != null && Model.Product != null)
 {
@@ -67,14 +70,6 @@
                             <h2 class="product-title">
                                 @Model.Product.Name
                             </h2>
-                            @*<div class="flat-star style-1">
-                                <i class="fa fa-star"></i>
-                                <i class="fa fa-star"></i>
-                                <i class="fa fa-star"></i>
-                                <i class="fa fa-star-half-o"></i>
-                                <i class="fa fa-star-half-o"></i>
-                                <span>(1)</span>
-                            </div>*@
                             <p>
                                 @Model.Product.Description
                             </p>
@@ -100,8 +95,6 @@
                             <ul class="flat-socials">
                                 <li><a href="#"><i class="fa fa-facebook"></i></a></li>
                                 <li><a href="#"><i class="fa fa-twitter"></i></a></li>
-                                <li><a href="#"><i class="fa fa-pinterest"></i></a></li>
-                                <li><a href="#"><i class="fa fa-linkedin"></i></a></li>
                                 <li><a href="#"><i class="fa fa-google-plus"></i></a></li>
                             </ul>
                         </div>

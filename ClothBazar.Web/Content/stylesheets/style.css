@@ -43,6 +43,9 @@
 /* Reset
 -------------------------------------------------------------- */
 
+.pointer{
+    cursor:pointer!important;
+}
  
 	html {
 		overflow-y: scroll;
@@ -393,7 +396,7 @@ input[type="color"],
 	   -moz-box-shadow: none;
 	     -o-box-shadow: none;
 	        box-shadow: none;
-	color: #c5c5c5;
+	/*color: #c5c5c5;*/
 }
 
 h1,h2,h3,h4,h5 {
@@ -1062,7 +1065,6 @@ h6 { font-size: 14px; line-height: 48px; font-weight: 400;}
 }
 
 .menu-extra li a:hover {
-	background: #eeeeee;
 	color: #f63440;
 }
 

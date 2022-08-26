@@ -66,16 +66,6 @@
         }
     };
 
-    function hideLoader() {
-        $(".loader").hide();
-        $("#loading-overlay").hide('slow');
-    };
-
-    function showLoader() {
-        $(".loader").show();
-        $("#loading-overlay").show();
-    };
-
     var flatAccordion = function() {
       var speed= {duration: 600};
       $('.toggle-content').hide();
@@ -842,5 +832,33 @@
       flatIsotope();
       flatCarouselOwl();
       flatContentBox();
+      updateCartProducts();
    	});
 })(jQuery);
+
+
+function hideLoader() {
+    $(".loader").hide();
+    $("#loading-overlay").hide('slow');
+};
+
+function showLoader() {
+    $(".loader").show();
+    $("#loading-overlay").show();
+};
+
+function updateCartProducts() {
+    var cartProducts;
+    var existingCookieData = $.cookie('CartProducts');
+
+    if (existingCookieData != undefined && existingCookieData != "" && existingCookieData != null) {
+        cartProducts = existingCookieData.split('-');
+    }
+    else {
+        cartProducts = [];
+    }
+
+    $("#cartProductsCount").html(cartProducts.length);
+};
+
+ 

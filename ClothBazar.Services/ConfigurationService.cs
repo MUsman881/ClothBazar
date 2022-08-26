@@ -45,7 +45,7 @@ namespace ClothBazar.Services
                 var pageSizeConfig = context.Configurations.Find("PageSize");
 
                 //if pagesize value is added in db it value should be return otherwise it will 10.
-                return pageSizeConfig != null ? int.Parse(pageSizeConfig.Value) : 10;
+                return pageSizeConfig != null ? int.Parse(pageSizeConfig.Value) : 5;
             }
         }
 
@@ -55,7 +55,7 @@ namespace ClothBazar.Services
             {
                 var pageSizeConfig = context.Configurations.Find("ShopPageSize");
 
-                //if pagesize value is added in db it value should be return otherwise it will 10.
+                //if pagesize value is added in db it value should be return otherwise it will 6
                 return pageSizeConfig != null ? int.Parse(pageSizeConfig.Value) : 6;
             }
         }
