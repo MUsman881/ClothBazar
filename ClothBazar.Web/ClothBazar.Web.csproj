@@ -172,6 +172,7 @@
     <Compile Include="Controllers\CategoryController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\ManageController.cs" />
+    <Compile Include="Controllers\OrderController.cs" />
     <Compile Include="Controllers\ProductController.cs" />
     <Compile Include="Controllers\SharedController.cs" />
     <Compile Include="Controllers\ShopController.cs" />
@@ -187,6 +188,10 @@
     <Compile Include="Migrations\202208201940335_AddedNewPropUser.Designer.cs">
       <DependentUpon>202208201940335_AddedNewPropUser.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\202208281127373_AddedPhoneNumberInRegister.cs" />
+    <Compile Include="Migrations\202208281127373_AddedPhoneNumberInRegister.Designer.cs">
+      <DependentUpon>202208281127373_AddedPhoneNumberInRegister.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\AccountViewModels.cs" />
     <Compile Include="Models\IdentityModels.cs" />
@@ -195,6 +200,7 @@
     <Compile Include="Startup.cs" />
     <Compile Include="ViewModels\CategoryViewModels.cs" />
     <Compile Include="ViewModels\HomeViewModels.cs" />
+    <Compile Include="ViewModels\OrdersViewModel.cs" />
     <Compile Include="ViewModels\ProductViewModel.cs" />
     <Compile Include="ViewModels\SharedViewModel.cs" />
     <Compile Include="ViewModels\ShopViewModels.cs" />
@@ -539,6 +545,7 @@
     <Content Include="Content\fonts\FontAwesome.otf" />
     <Content Include="Content\images\.DS_Store" />
     <Content Include="Content\images\shop\.DS_Store" />
+    <None Include="Properties\PublishProfiles\ClothBazar.pubxml" />
     <None Include="Scripts\jquery-1.10.2.intellisense.js" />
     <Content Include="Scripts\jquery-1.10.2.js" />
     <Content Include="Scripts\jquery-1.10.2.min.js" />
@@ -551,7 +558,9 @@
     <Content Include="Scripts\respond.js" />
     <Content Include="Scripts\respond.min.js" />
     <Content Include="Scripts\_references.js" />
-    <Content Include="Web.config" />
+    <Content Include="Web.config">
+      <SubType>Designer</SubType>
+    </Content>
     <Content Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </Content>
@@ -598,6 +607,8 @@
     <Content Include="Views\Product\Details.cshtml" />
     <Content Include="Views\Shop\Index.cshtml" />
     <Content Include="Views\Shop\FilterProducts.cshtml" />
+    <Content Include="Views\Order\Index.cshtml" />
+    <Content Include="Views\Order\Detail.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
@@ -628,6 +639,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\202208201940335_AddedNewPropUser.resx">
       <DependentUpon>202208201940335_AddedNewPropUser.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202208281127373_AddedPhoneNumberInRegister.resx">
+      <DependentUpon>202208281127373_AddedPhoneNumberInRegister.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>

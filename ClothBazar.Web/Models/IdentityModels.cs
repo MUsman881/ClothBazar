@@ -10,6 +10,7 @@ namespace ClothBazar.Web.Models
     public class ApplicationUser : IdentityUser
     {
         public string Name { get; set; }
+        public string Number { get; set; }
         public string Address { get; set; }
         public string Country { get; set; }
 

@@ -256,18 +256,6 @@
 
             });
 
-            var products = [];
-
-            $(".addtoCart").click(function () {
-
-                var productID = $(this).attr('data-id');
-
-                products.push(productID);
-
-                $.cookie('CartProducts', products.join('-'), {path : '/' });
-
-            }) ;
-
 
         });
 

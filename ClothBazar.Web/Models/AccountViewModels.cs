@@ -69,6 +69,10 @@ namespace ClothBazar.Web.Models
         public string Name { get; set; }
 
         [Required]
+        [Display(Name = "Number")]
+        public string Number { get; set; }
+
+        [Required]
         [Display(Name = "Address")]
         public string Address { get; set; }
 
